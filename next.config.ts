@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* This tells Next.js v16 to completely disable the development indicators overlay */
+  devIndicators: false,
 };
 
 export default nextConfig;
