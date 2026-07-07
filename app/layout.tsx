@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Roboto_Mono } from "next/font/google";
+import { Inter, Roboto_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 // 1. Initialize our hand-picked typography system
@@ -9,10 +9,10 @@ const sansFont = Inter({
   display: "swap",
 });
 
-const monoFont = JetBrains_Mono({
+
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
+  variable: "--font-space-grotesk",
 });
 
 const robotoMono = Roboto_Mono({
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     // 3. Inject our variables cleanly into the document root
-    <html lang="en" className={`${sansFont.variable} ${robotoMono.variable}`}>
+    <html lang="en" className={`${sansFont.variable} ${robotoMono.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased bg-[#FAF9F6]">{children}</body>
     </html>
   );
