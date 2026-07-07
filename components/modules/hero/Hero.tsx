@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import HeroBackground from "./HeroBackground";
 import HeroHeadline from "./HeroHeadline";
 import HeroHeader from "./HeroHeader";
 import HeroAside from "./HeroAside";
@@ -11,7 +10,6 @@ import HeroButtons from "./HeroButtons";
 export default function Hero() {
   return (
     <section className="relative min-h-screen w-full bg-[#FAF9F6] text-zinc-800 flex flex-col justify-between p-6 md:p-8 select-none">
-      <HeroBackground />
 
       {/* 1. GLOBAL NAVIGATION HEADER LAYER */}
       <HeroHeader />
