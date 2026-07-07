@@ -31,88 +31,86 @@ export default function GlobalHeader() {
   return (
     <>
       <motion.div
-      variants={{
-        visible: { y: 0, opacity: 1 },
-        hidden: { y: "-150%", opacity: 0 },
-      }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="fixed top-6 inset-x-0 z-[60] flex justify-end sm:justify-center pointer-events-none px-6 sm:px-4"
+  variants={{
+    visible: { y: 0, opacity: 1 },
+    hidden: { y: "-150%", opacity: 0 },
+  }}
+  animate={hidden ? "hidden" : "visible"}
+  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+  className="fixed top-6 inset-x-0 z-[60] flex justify-end sm:justify-center pointer-events-none px-6 sm:px-4"
+>
+  {/* THE SMOOTH RE-ANIMATING PILL
+    Removed 'backdrop-blur' to stop the layout rendering delay.
+    Increased opacity to 90% and relied on the dense off-white shadow cushion 
+    to preserve readability without any visual stutter.
+  */}
+  <motion.nav
+    initial={{ width: 44, opacity: 0 }}
+    animate={hidden ? { width: 44, opacity: 0 } : { width: "auto", opacity: 1 }}
+    transition={{
+      type: "spring",
+      bounce: 0.22, // Slightly cleaner bounce curve for performance
+      duration: 0.7,
+    }}
+    className="pointer-events-auto overflow-hidden flex items-center gap-3 sm:gap-6 pl-2 pr-2 sm:pr-5 py-2 rounded-2xl bg-[#FAF9F6]/90 border border-white shadow-[0_4px_24px_-2px_rgba(24,24,27,0.04),0_0_40px_8px_rgba(250,249,246,0.95)]"
+  >
+    {/* 1. Home Button */}
+    <a
+      href="#"
+      onClick={() => setMenuOpen(false)}
+      className="flex items-center justify-center w-7 h-7 rounded-lg bg-[#FAF9F6] hover:bg-white text-zinc-800 border border-white/90 shadow-sm transition-all active:scale-95 shrink-0"
+      aria-label="Back to home"
     >
-      {/* 
-        THE EXPANDING PILL
-        Animates from 44px wide (just the home button) to 'auto' 
-      */}
-      <motion.nav
-        initial={{ width: 44, opacity: 0 }}
-        animate={{ width: "auto", opacity: 1 }}
-        transition={{
-          type: "spring",
-          bounce: 0.4, // Gives it that "slightly bubbly" elastic feel
-          duration: 0.8,
-          delay: 0.1, // Slight delay so it pops after page load
-        }}
-        // overflow-hidden ensures the links are clipped until the pill opens wide enough
-        className="pointer-events-auto overflow-hidden flex items-center gap-3 sm:gap-6 pl-2 pr-2 sm:pr-5 py-2 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)]"
+      <svg
+        className="w-3.5 h-3.5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="2.5"
       >
-        {/* 1. Home Button */}
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+        />
+      </svg>
+    </a>
+
+    {/* 2. Desktop Navigation Links */}
+    <div className="hidden sm:flex items-center gap-4 sm:gap-6 whitespace-nowrap">
+      {["About", "Experience", "Projects", "Contact"].map((item) => (
         <a
-          href="#"
-          onClick={() => setMenuOpen(false)}
-          className="flex items-center justify-center w-7 h-7 rounded-lg bg-white/60 hover:bg-white text-zinc-700 border border-white/60 shadow-sm transition-all active:scale-95 shrink-0"
-          aria-label="Back to home"
+          key={item}
+          href={`#${item.toLowerCase()}`}
+          className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-950 transition-colors"
         >
-          <svg
-            className="w-3.5 h-3.5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
+          {item}
         </a>
+      ))}
+    </div>
 
-        {/* 2. Desktop Navigation Links */}
-        {/* whitespace-nowrap is crucial here so the text doesn't stack during the width animation */}
-        <div className="hidden sm:flex items-center gap-4 sm:gap-6 whitespace-nowrap">
-          {["About", "Experience", "Projects", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-zinc-950 transition-colors"
-            >
-              {item}
-            </a>
-          ))}
-        </div>
-
-        {/* 3. Mobile Hamburger Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="flex sm:hidden items-center justify-center w-7 h-7 rounded-lg hover:bg-white/50 text-zinc-700 transition-all active:scale-95 shrink-0"
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </motion.nav>
-    </motion.div>
+    {/* 3. Mobile Hamburger Button */}
+    <button
+      onClick={() => setMenuOpen(!menuOpen)}
+      className="flex sm:hidden items-center justify-center w-7 h-7 rounded-lg hover:bg-white/60 text-zinc-800 transition-all active:scale-95 shrink-0"
+      aria-label="Toggle menu"
+    >
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="2.2"
+      >
+        {menuOpen ? (
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        ) : (
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        )}
+      </svg>
+    </button>
+  </motion.nav>
+</motion.div>
 
       {/* 4. Full Screen Mobile Menu Overlay */}
       <AnimatePresence>

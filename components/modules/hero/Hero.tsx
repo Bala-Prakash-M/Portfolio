@@ -17,27 +17,26 @@ export default function Hero() {
       {/* 2. CENTER STAGE: SYSTEM TYPOGRAPHY & CALL TO ACTION */}
       {/* FIX: Added pt-28 to clear the header, and flex-1 to perfectly center the content vertically */}
       <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-1 flex-col items-center justify-center text-center pt-28 pb-12 space-y-6">
+        {/* 1. Micro-Entry Title Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          // Enters very early (0.2s delay) with a slow, smooth ease
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center gap-2"
         >
           <span className="font-mono text-xs font-bold tracking-[0.25em] text-[#B3533B] uppercase">
             {"Full stack developer"}
           </span>
-          {/* A tiny, fixed geometric anchor */}
           <div className="w-8 h-[1px] bg-[#B3533B]/30" />
         </motion.div>
 
         <HeroHeadline />
 
+        {/* 2. Micro-Entry Description Paragraph */}
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
-          // Enters after the H1 finishes (0.6s delay), bridging the gap to the buttons
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           className="text-zinc-600 text-sm md:text-base max-w-md mx-auto leading-relaxed font-normal pt-6 tracking-wide"
         >
           {
