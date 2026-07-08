@@ -26,11 +26,6 @@ export default function HeroBackground() {
       transition={{ duration: 1.2, ease: "easeInOut" }}
       className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0 bg-[#EFEBE6]"
     >
-      {/* PREMIUM EDITORIAL BLOB
-        We use a single, high-definition radiant light source. 
-        The movement is decoupled from the color shift to create 
-        an unpredictable, high-fashion drift.
-      */}
       <motion.div
         className="absolute w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] rounded-full blur-[90px]"
         animate={{
@@ -39,10 +34,26 @@ export default function HeroBackground() {
           y: ["0vh", "30vh", "60vh", "0vh"],
           background: [
             "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
-            "radial-gradient(circle, #FF3385 0%, transparent 60%)",
-            "radial-gradient(circle, #E61966 0%, transparent 60%)",
-            "radial-gradient(circle, #FF66B2 0%, transparent 60%)",
-            "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
+            // Royal Crimson
+            "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
+
+            // Sapphire Blue
+            "radial-gradient(circle, #2563EB 0%, transparent 60%)",
+
+            // Deep Indigo
+            "radial-gradient(circle, #5B21B6 0%, transparent 60%)",
+
+            // Emerald
+            "radial-gradient(circle, #0F9D7A 0%, transparent 60%)",
+
+            // Rich Amber
+            "radial-gradient(circle, #D97706 0%, transparent 60%)",
+
+            // Electric Violet
+            "radial-gradient(circle, #7C3AED 0%, transparent 60%)",
+
+            // Return
+            "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
           ],
         }}
         transition={{
@@ -56,7 +67,8 @@ export default function HeroBackground() {
       <div
         className="absolute inset-0 opacity-[0.04] mix-blend-soft-light"
         style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")',
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")',
         }}
       />
     </motion.div>

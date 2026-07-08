@@ -6,26 +6,23 @@ import type { Variants } from "framer-motion";
 import { Project } from "./data";
 
 interface RightPartProps {
-  activeProject: Project & { philosophy?: string }; // Fallback type check supporting philosophy string
+  activeProject: Project & { philosophy?: string };
 }
 
 export default function RightPart({ activeProject }: RightPartProps) {
   // Accelerated under-350ms cinematic variant matrix
   const panelVariants: Variants = {
-    initial: { opacity: 0, y: 10 },
+    initial: { opacity: 0 },
     animate: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.3,
-        ease: [0.16, 1, 0.3, 1],
-        staggerChildren: 0.03,
+        staggerChildren: 0.04, // Perfectly staggers rows down the line
         delayChildren: 0.01,
       },
     },
     exit: {
       opacity: 0,
-      y: -8,
+      y: -6,
       transition: { duration: 0.15, ease: "easeIn" },
     },
   };
@@ -48,12 +45,12 @@ export default function RightPart({ activeProject }: RightPartProps) {
           initial="initial"
           animate="animate"
           exit="exit"
-          className="space-y-6" // Tight structural row grouping to prevent viewport overflow
+          className="space-y-6"
         >
           {/* ====================================================================
-              SECTION 1 & 2: CATEGORY, TITLE & PHILOSOPHY BLOCK
+              ROW 1: CATEGORY, TITLE & PHILOSOPHY BLOCK (Now part of stagger cascade)
              ==================================================================== */}
-          <div className="w-full space-y-1">
+          <motion.div variants={childVariants} className="w-full space-y-1">
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-400 block">
               {activeProject.shortCategory} · {activeProject.year}
             </span>
@@ -62,18 +59,17 @@ export default function RightPart({ activeProject }: RightPartProps) {
               {activeProject.title}
             </h2>
 
-            {/* Added: One-line distinct visual project philosophy marker */}
             <p className="text-xs font-mono text-[#B3533B] tracking-wide pt-0.5 italic">
               {activeProject.philosophy || "Designed for production, not demonstration."}
             </p>
-          </div>
+          </motion.div>
 
           {/* ====================================================================
-              SECTION 3: FLAT ROW JOURNAL METADATA
+              ROW 2: FLAT ROW JOURNAL METADATA
              ==================================================================== */}
           <motion.div
             variants={childVariants}
-            className="grid grid-cols-4 gap-4 py-3 border-y border-zinc-200/60"
+            className="grid grid-cols-3 gap-4 py-3 border-y border-zinc-200/60"
           >
             <div>
               <div className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">Type</div>
@@ -90,7 +86,7 @@ export default function RightPart({ activeProject }: RightPartProps) {
           </motion.div>
 
           {/* ====================================================================
-              SECTION 4: 2–3 LINE OVERVIEW BLOCK
+              ROW 3: OVERVIEW BLOCK
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-1">
             <h4 className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Overview</h4>
@@ -100,7 +96,7 @@ export default function RightPart({ activeProject }: RightPartProps) {
           </motion.div>
 
           {/* ====================================================================
-              SECTION 5: HIGH-DENSITY CONCISE ENGINEERING HIGHLIGHTS GRID
+              ROW 4: ENGINEERING HIGHLIGHTS GRID
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-2">
             <h4 className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Engineering Highlights</h4>
@@ -119,7 +115,7 @@ export default function RightPart({ activeProject }: RightPartProps) {
           </motion.div>
 
           {/* ====================================================================
-              SECTION 6: INLINE TECH BUILT STACK
+              ROW 5: INLINE TECH BUILT STACK
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-1">
             <h4 className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Built With</h4>
@@ -140,7 +136,7 @@ export default function RightPart({ activeProject }: RightPartProps) {
           </motion.div>
 
           {/* ====================================================================
-              SECTION 7: LIGHTWEIGHT EDITORIAL ACTIONS
+              ROW 6: LIGHTWEIGHT EDITORIAL ACTIONS
              ==================================================================== */}
           <motion.div
             variants={childVariants}
@@ -155,7 +151,6 @@ export default function RightPart({ activeProject }: RightPartProps) {
                   aria-label="View Source Code"
                   className="p-1 rounded text-zinc-500 hover:text-zinc-950 transition-colors duration-150 block"
                 >
-                  {/* UPSCALED GITHUB ICON */}
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -169,8 +164,6 @@ export default function RightPart({ activeProject }: RightPartProps) {
                     <path d="M9 18c-4.51 2-5-2-7-2" />
                   </svg>
                 </a>
-                
-                {/* TOOLTIP */}
                 <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 opacity-0 pointer-events-none transition-opacity duration-100 whitespace-nowrap px-3 py-1.5 rounded bg-zinc-900 text-zinc-50 text-[11px] font-mono tracking-wide shadow-md group-hover/btn:opacity-100 z-50">
                   source_code
                 </span>
@@ -186,7 +179,6 @@ export default function RightPart({ activeProject }: RightPartProps) {
                   aria-label="View Live Preview"
                   className="p-1 rounded text-zinc-500 hover:text-[#B3533B] transition-colors duration-150 block"
                 >
-                  {/* UPSCALED EXTERNAL LINK ICON */}
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -201,8 +193,6 @@ export default function RightPart({ activeProject }: RightPartProps) {
                     <line x1="10" y1="14" x2="21" y2="3" />
                   </svg>
                 </a>
-
-                {/* TOOLTIP */}
                 <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 opacity-0 pointer-events-none transition-opacity duration-100 whitespace-nowrap px-3 py-1.5 rounded bg-zinc-900 text-zinc-50 text-[11px] font-mono tracking-wide shadow-md group-hover/btn:opacity-100 z-50">
                   live_preview
                 </span>
