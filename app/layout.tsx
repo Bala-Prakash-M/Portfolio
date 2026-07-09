@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     // 3. Inject our variables cleanly into the document root
-    <html lang="en" className={`${sansFont.variable} ${robotoMono.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${sansFont.variable} ${robotoMono.variable} ${spaceGrotesk.variable} scroll-smooth`}>
       <body className="antialiased bg-[#FAF9F6]">{children}</body>
     </html>
   );

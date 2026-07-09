@@ -14,7 +14,7 @@ export default function SocialButtons() {
   const socials: SocialItem[] = [
     {
       name: "Mail",
-      href: "mailto:your.email@example.com",
+      href: "mailto:pbala1851@email.com",
       tooltipText: "send_email",
       brandClass: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/30 hover:text-[#EA4335]",
       icon: (
@@ -25,7 +25,7 @@ export default function SocialButtons() {
     },
     {
       name: "GitHub",
-      href: "https://github.com",
+      href: "https://github.com/Bala-Prakash-M",
       tooltipText: "open_repository",
       brandClass: "hover:bg-zinc-900 hover:border-zinc-950 hover:text-white",
       icon: (
@@ -37,7 +37,7 @@ export default function SocialButtons() {
     },
     {
       name: "LinkedIn",
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/bala-prakash-027725362/",
       tooltipText: "view_profile",
       brandClass: "hover:bg-[#0077B5]/10 hover:border-[#0077B5]/30 hover:text-[#0077B5]",
       icon: (
@@ -50,7 +50,7 @@ export default function SocialButtons() {
     },
     {
       name: "X",
-      href: "https://x.com",
+      href: "https://x.com/BalaPrakas74044",
       tooltipText: "view_feed",
       brandClass: "hover:bg-zinc-950 hover:border-zinc-950 hover:text-white",
       icon: (
@@ -68,7 +68,6 @@ export default function SocialButtons() {
         <div key={social.name} className="group/btn relative">
           <a
             href={social.href}
-            target="_blank"
             rel="noopener noreferrer"
             aria-label={`Connect via ${social.name}`}
             className={`p-3.5 rounded-xl text-zinc-500 bg-white border border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 block ${social.brandClass}`}

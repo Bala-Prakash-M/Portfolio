@@ -20,7 +20,8 @@ export default function LeftPart({ activeProject, setActiveProject }: LeftPartPr
         return (
           <motion.div
             key={project.id}
-            className="group relative w-full pt-5 pb-5 border-b border-zinc-200/80 flex items-start justify-between outline-none select-none"
+            onClick={() => setActiveProject(project)}
+            className="group relative w-full pt-5 pb-5 border-b border-zinc-200/80 flex items-start justify-between outline-none select-none cursor-pointer"
           >
             {/* Active Indicator Slide Overlay */}
             {isActive && (
@@ -33,8 +34,7 @@ export default function LeftPart({ activeProject, setActiveProject }: LeftPartPr
 
             {/* INTERACTIVE CLICK ZONE: Info block layout */}
             <div 
-              onClick={() => setActiveProject(project)}
-              className="flex gap-6 items-start pl-4 cursor-pointer flex-1 transition-transform duration-300 ease-[0.16,1,0.3,1] group-hover:translate-x-1"
+              className="flex gap-6 items-start pl-4 flex-1 transition-transform duration-300 ease-[0.16,1,0.3,1] group-hover:translate-x-1"
             >
               <span
                 className={`font-mono text-[11px] font-bold tracking-wider transition-colors duration-200 pt-0.5 ${

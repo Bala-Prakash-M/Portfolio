@@ -4,7 +4,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
-export default function HeroButtons() {
+interface HeroButtonProps {
+  onNavigate: (item: string) => void, 
+}
+
+export default function HeroButtons({ onNavigate }: HeroButtonProps) {
   // 1. Parent Container: Handles the initial block delay and staggers child components
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -43,10 +47,11 @@ export default function HeroButtons() {
       {/* LEFT PRIMARY BUTTON: Wipes Right to Left */}
       <motion.button
         variants={slideUpVariants}
+        onClick={() => onNavigate("Experience")}
         // Micro-hover response keeps the bubbly momentum alive
         whileHover={{ scale: 1.015, y: -1 }}
         whileTap={{ scale: 0.99, y: 0 }}
-        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-900 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-150 hover:shadow-lg hover:shadow-zinc-900/15"
+        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-900 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-150 hover:shadow-lg hover:shadow-zinc-900/15 cursor-pointer"
       >
         <motion.div variants={containerVariants} className="relative z-10 flex items-center gap-2.5 font-sans text-[11px] font-semibold tracking-[0.15em] uppercase">
           <span>{"View My Work"}</span>
@@ -65,13 +70,13 @@ export default function HeroButtons() {
       {/* RIGHT SECONDARY BUTTON: Wipes Left to Right */}
       <motion.a
         variants={slideUpVariants}
-        href="/resume.pdf"
+        onClick={() => onNavigate("Resume")}
         target="_blank"
         rel="noopener noreferrer"
         // Same micro-hover kinematics for UI symmetry
         whileHover={{ scale: 1.015, y: -1 }}
         whileTap={{ scale: 0.99, y: 0 }}
-        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-100 text-zinc-800 border border-zinc-200/80 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors duration-150 hover:bg-zinc-200/50"
+        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-100 text-zinc-800 border border-zinc-200/80 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors duration-150 hover:bg-zinc-200/50 cursor-pointer"
       >
         <motion.div variants={containerVariants} className="relative z-10 flex items-center gap-2.5 font-sans text-[11px] font-semibold tracking-[0.15em] uppercase">
           <svg

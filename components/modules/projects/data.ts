@@ -55,8 +55,8 @@ export const selectedWork: Project[] = [
       "Cloudinary",
     ],
 
-    githubUrl: "https://github.com",
-    liveUrl: "https://demo.com",
+    githubUrl: undefined,
+    liveUrl: "https://teezmart-ecom-nzc.vercel.app/",
   },
 
   {
@@ -85,8 +85,8 @@ export const selectedWork: Project[] = [
 
     stack: ["React", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS"],
 
-    githubUrl: "https://github.com",
-    liveUrl: "https://demo.com",
+    githubUrl: "https://github.com/Bala-Prakash-M/Todo-Notes",
+    liveUrl: "https://todo-notes-eta.vercel.app/",
   },
 
   {
@@ -120,7 +120,7 @@ export const selectedWork: Project[] = [
       "Ed25519",
     ],
 
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/Bala-Prakash-M/HD-Wallet",
     liveUrl: undefined,
   },
 ];

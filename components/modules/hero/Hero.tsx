@@ -3,18 +3,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 import HeroHeadline from "./HeroHeadline";
-import HeroHeader from "./HeroHeader";
-import HeroAside from "./HeroAside";
+import Header from "../header/Header";
+import Aside from "../aside/Aside";
 import HeroButtons from "./HeroButtons";
 
-export default function Hero() {
+interface HeroProps {
+  onNavigate: (item: string) => void;
+}
+
+export default function Hero({ onNavigate }: HeroProps) {
   return (
     <section className="relative min-h-screen w-full bg-[#FAF9F6] text-zinc-800 flex flex-col justify-between p-6 md:p-8 select-none">
-
       {/* 1. GLOBAL NAVIGATION HEADER LAYER */}
-      <HeroHeader />
+      <Header onNavigate={onNavigate}/>
 
-      {/* 2. CENTER STAGE: SYSTEM TYPOGRAPHY & CALL TO ACTION */}
       {/* FIX: Added pt-28 to clear the header, and flex-1 to perfectly center the content vertically */}
       <div className="relative z-20 w-full max-w-3xl mx-auto flex flex-1 flex-col items-center justify-center text-center pt-28 pb-12 space-y-6">
         {/* 1. Micro-Entry Title Badge */}
@@ -45,11 +47,11 @@ export default function Hero() {
         </motion.p>
 
         {/* Action Button Layout */}
-        <HeroButtons />
+        <HeroButtons onNavigate={onNavigate}/>
       </div>
 
       {/* 3. RIGHT FLOATING SIDEBAR */}
-      <HeroAside />
+      <Aside />
 
       {/* 4. BASE INTERFACE ROW: SCROLL CONTEXT */}
       <footer className="relative z-20 w-full pt-8 pb-4 px-6 md:px-8">
