@@ -13,18 +13,19 @@ export default function HeroBackgroundMobile() {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const triggerPoint = windowHeight * 0.2;
+    /* INCREASED FADING POINT: 
+      Changed from 0.2 to 0.45. The blob will now remain visible much longer 
+      and won't start fading until you scroll almost halfway down the screen.
+    */
+    const triggerPoint = windowHeight * 0.55;
     const shouldClear = latest > triggerPoint;
-
+    
     if (shouldClear !== fogCleared) {
       setFogCleared(shouldClear);
     }
   });
 
   return (
-    /* On mobile, dynamic browser UI can expose a bottom gap if the fixed layer
-       only tracks the layout viewport. Expanding to the dynamic viewport keeps
-       the background pinned during upward scroll when the browser bars return. */
     <div className="fixed inset-0 h-dvh w-screen overflow-hidden pointer-events-none select-none z-0 bg-[#EFEBE6]">
       {/* SEAMLESS SCREEN-WIDE MOBILE BLOB */}
       <motion.div
@@ -32,9 +33,6 @@ export default function HeroBackgroundMobile() {
         animate={{
           x: ["0vw", "55vw", "25vw", "0vw"],
           y: ["0vh", "35vh", "65vh", "0vh"],
-          /* FIX: Animate opacity directly inside the variant track. 
-             This forces it to fade out smoothly in place without altering or interrupting its travel vector calculations.
-          */
           opacity: fogCleared ? 0 : 1,
         }}
         style={{
@@ -46,7 +44,7 @@ export default function HeroBackgroundMobile() {
         transition={{
           x: { duration: 16, repeat: Infinity, ease: "easeInOut" },
           y: { duration: 14, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 0.6, ease: "easeInOut" }, // Controlled non-blocking fade duration
+          opacity: { duration: 0.6, ease: "easeInOut" },
         }}
       />
 
