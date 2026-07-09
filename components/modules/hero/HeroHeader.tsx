@@ -78,7 +78,7 @@ export default function GlobalHeader() {
 
     {/* 2. Desktop Navigation Links */}
     <div className="hidden sm:flex items-center gap-4 sm:gap-6 whitespace-nowrap">
-      {["About", "Experience", "Projects", "Contact"].map((item) => (
+      {["About", "Experience", "Projects", "Contact", "Resume"].map((item) => (
         <a
           key={item}
           href={`#${item.toLowerCase()}`}

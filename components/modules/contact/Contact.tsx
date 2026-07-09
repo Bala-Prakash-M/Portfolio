@@ -78,10 +78,10 @@ export default function Contact() {
         </div>
 
         {/* BASELINE CLOSING RULE LINK */}
-        <motion.div
+        {/* <motion.div
           variants={lineVariants}
           className="w-full h-[1px] bg-zinc-200/80 origin-left"
-        />
+        /> */}
       </motion.div>
     </section>
   );

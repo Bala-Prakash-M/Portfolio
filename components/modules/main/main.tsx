@@ -4,6 +4,7 @@ import AboutSection from "@/components/modules/about/About";
 import Experience from "@/components/modules/experience/Experience";
 import Projects from "@/components/modules/projects/Projects";
 import Contact from "@/components/modules/contact/Contact";
+import Footer from "../footer/Footer";
 
 export default function Main() {
   return (
@@ -14,6 +15,7 @@ export default function Main() {
       <Experience />
       <Projects />
       <Contact />
+      <Footer />
     </>
   );
 }

@@ -29,37 +29,42 @@ export default function HeroBackground() {
       <motion.div
         className="absolute w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] rounded-full blur-[90px]"
         animate={{
-          // Orbiting path: covers 0% to 80% of the viewport smoothly
           x: ["0vw", "60vw", "40vw", "0vw"],
           y: ["0vh", "30vh", "60vh", "0vh"],
           background: [
+            // 1. Start: Vivid Coral
             "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
-            // Royal Crimson
-            "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
 
-            // Sapphire Blue
-            "radial-gradient(circle, #2563EB 0%, transparent 60%)",
+            // 2. Neon Magenta / Pink
+            "radial-gradient(circle, #FF007F 0%, transparent 60%)",
 
-            // Deep Indigo
-            "radial-gradient(circle, #5B21B6 0%, transparent 60%)",
-
-            // Emerald
-            "radial-gradient(circle, #0F9D7A 0%, transparent 60%)",
-
-            // Rich Amber
-            "radial-gradient(circle, #D97706 0%, transparent 60%)",
-
-            // Electric Violet
+            // 3. Electric Violet
             "radial-gradient(circle, #7C3AED 0%, transparent 60%)",
 
-            // Return
+            // 4. Electric Cyan / Neon Blue
+            "radial-gradient(circle, #00F0FF 0%, transparent 60%)",
+
+            // 5. High-Voltage Lime
+            "radial-gradient(circle, #39FF14 0%, transparent 60%)",
+
+            // 6. Laser Yellow
+            "radial-gradient(circle, #FFEA00 0%, transparent 60%)",
+
+            // 7. Vivid Tangerine
+            "radial-gradient(circle, #FF6600 0%, transparent 60%)",
+
+            // 8. Royal Crimson
             "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
+
+            // 9. END: Must perfectly match the starting color for a seamless loop
+            "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
           ],
         }}
         transition={{
           x: { duration: 25, repeat: Infinity, ease: "easeInOut" },
           y: { duration: 20, repeat: Infinity, ease: "easeInOut" },
-          background: { duration: 20, repeat: Infinity, ease: "easeInOut" },
+          // Increased duration slightly to accommodate more colors and set ease to linear for smooth morphing
+          background: { duration: 35, repeat: Infinity, ease: "linear" },
         }}
       />
 
