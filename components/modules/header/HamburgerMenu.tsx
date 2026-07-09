@@ -10,30 +10,30 @@ export default function HamburgerMenu({
   return (
     <button
       onClick={() => setMenuOpen(!menuOpen)}
-      className="flex sm:hidden items-center justify-center w-7 h-7 rounded-lg hover:bg-white/60 text-zinc-800 transition-all active:scale-95 shrink-0"
+      className="flex sm:hidden flex-col items-center justify-center gap-[4px] w-7 h-7 rounded-lg hover:bg-white/60 text-zinc-800 transition-all active:scale-95 shrink-0 will-change-transform"
       aria-label="Toggle menu"
+      style={{ transform: "translateZ(0)" }} // Forces immediate GPU layer promotion
     >
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="2.2"
-      >
-        {menuOpen ? (
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        ) : (
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        )}
-      </svg>
+      {/* TOP LINE */}
+      <span
+        className={`w-4 h-[1.75px] bg-current rounded-full transition-all duration-300 ease-out will-change-transform ${
+          menuOpen ? "rotate-45 translate-y-[5.75px]" : ""
+        }`}
+      />
+
+      {/* MIDDLE LINE */}
+      <span
+        className={`w-4 h-[1.75px] bg-current rounded-full transition-all duration-200 ease-out will-change-transform ${
+          menuOpen ? "opacity-0 scale-x-0" : ""
+        }`}
+      />
+
+      {/* BOTTOM LINE */}
+      <span
+        className={`w-4 h-[1.75px] bg-current rounded-full transition-all duration-300 ease-out will-change-transform ${
+          menuOpen ? "-rotate-45 -translate-y-[5.75px]" : ""
+        }`}
+      />
     </button>
   );
 }
