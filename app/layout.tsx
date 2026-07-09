@@ -23,8 +23,9 @@ const robotoMono = Roboto_Mono({
 
 // 2. Premium, customized application metadata
 export const metadata: Metadata = {
-  title: "Architecting Distributed Systems",
-  description: "Personal engineering journal and software portfolio specializing in scalable backend systems and high-fidelity interfaces.",
+  title: "Bala Prakash | Full-Stack Software Engineer",
+  description:
+    "Portfolio of Bala Prakash, a third-year Information Technology student building production-ready full-stack applications with scalable backend systems and thoughtful user experiences.",
 };
 
 export default function RootLayout({
