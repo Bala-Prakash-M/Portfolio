@@ -33,7 +33,9 @@
   }
 }
 
+html,
 body {
+  background-color: #efebe6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

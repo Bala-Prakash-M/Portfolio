@@ -22,8 +22,10 @@ export default function HeroBackgroundMobile() {
   });
 
   return (
-    /* FIXED: Container stays persistently mounted to act as a stable layout canvas */
-    <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0 bg-[#EFEBE6]">
+    /* On mobile, dynamic browser UI can expose a bottom gap if the fixed layer
+       only tracks the layout viewport. Expanding to the dynamic viewport keeps
+       the background pinned during upward scroll when the browser bars return. */
+    <div className="fixed inset-0 h-dvh w-screen overflow-hidden pointer-events-none select-none z-0 bg-[#EFEBE6]">
       {/* SEAMLESS SCREEN-WIDE MOBILE BLOB */}
       <motion.div
         className="absolute w-[35vw] h-[35vw] min-w-[280px] min-h-[280px] rounded-full blur-[50px] will-change-transform"
