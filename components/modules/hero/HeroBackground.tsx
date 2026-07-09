@@ -7,7 +7,7 @@ import { useScreenSize } from "@/components/shared/hooks/useScreenSize";
 export default function HeroBackground() {
   const { scrollY } = useScroll();
   const [windowHeight, setWindowHeight] = useState(800);
-  const { isMobile, isPad } = useScreenSize();
+  const { isMobile, isPad , width} = useScreenSize();
   const [fogCleared, setFogCleared] = useState(false);
 
   useEffect(() => {

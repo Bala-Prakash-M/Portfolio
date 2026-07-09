@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -9,30 +9,41 @@ interface HeroButtonProps {
 }
 
 export default function HeroButtons({ onNavigate }: HeroButtonProps) {
-  // 1. Parent Container: Handles the initial block delay and staggers child components
+  // Screen size detection hooks
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640); // Matches Tailwind's 'sm' breakpoint
+    };
+    
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        delayChildren: 0.8,    // Waits perfectly for your main hero typography to typeset
-        staggerChildren: 0.15, // Creates a clean, sequential reveal feel
+        delayChildren: isMobile ? 0.4 : 0.8,    // SNAPPY: Faster mount on mobile screens
+        staggerChildren: isMobile ? 0.08 : 0.15, // Tighter staging cadence for performance
       },
     },
   };
 
-  // 2. Button Variant: Pure, hardware-accelerated glide with no size alterations
   const slideUpVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 16 
+      y: isMobile ? 8 : 16 // REDUCED: Half the movement distance on mobile to prevent paint lags
     },
     show: { 
       opacity: 1, 
       y: 0,
       transition: { 
-        duration: 0.7, 
-        ease: [0.16, 1, 0.3, 1] // Premium cubic-bezier: fast initial launch, smooth deceleration
+        duration: isMobile ? 0.4 : 0.7, // Fast, non-blocking execution duration on mobile
+        ease: [0.16, 1, 0.3, 1]
       }
     }
   };
@@ -44,19 +55,20 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
       animate="show"
       className="pt-6 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto select-none"
     >
-      {/* LEFT PRIMARY BUTTON: Wipes Right to Left */}
+      {/* LEFT PRIMARY BUTTON */}
       <motion.button
         variants={slideUpVariants}
         onClick={() => onNavigate("Experience")}
-        // Micro-hover response keeps the bubbly momentum alive
-        whileHover={{ scale: 1.015, y: -1 }}
-        whileTap={{ scale: 0.99, y: 0 }}
-        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-900 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-150 hover:shadow-lg hover:shadow-zinc-900/15 cursor-pointer"
+        /* PERFORMANCE ENGINES: Completely strips scale transformations on touch screens */
+        whileHover={isMobile ? undefined : { scale: 1.015, y: -1 }}
+        whileTap={isMobile ? { scale: 0.98 } : { scale: 0.99, y: 0 }}
+        style={{ transform: "translateZ(0)" }} // Forces immediate GPU layer acceleration
+        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-900 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-150 md:hover:shadow-lg md:hover:shadow-zinc-900/15 cursor-pointer"
       >
         <motion.div variants={containerVariants} className="relative z-10 flex items-center gap-2.5 font-sans text-[11px] font-semibold tracking-[0.15em] uppercase">
           <span>{"View My Work"}</span>
           <svg
-            className="w-3.5 h-3.5 text-zinc-400 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-100"
+            className="w-3.5 h-3.5 text-zinc-400 transition-transform duration-300 ease-out md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 md:group-hover:text-zinc-100"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -67,20 +79,21 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
         </motion.div>
       </motion.button>
 
-      {/* RIGHT SECONDARY BUTTON: Wipes Left to Right */}
+      {/* RIGHT SECONDARY BUTTON */}
       <motion.a
         variants={slideUpVariants}
         onClick={() => onNavigate("Resume")}
         target="_blank"
         rel="noopener noreferrer"
-        // Same micro-hover kinematics for UI symmetry
-        whileHover={{ scale: 1.015, y: -1 }}
-        whileTap={{ scale: 0.99, y: 0 }}
-        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-100 text-zinc-800 border border-zinc-200/80 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors duration-150 hover:bg-zinc-200/50 cursor-pointer"
+        /* PERFORMANCE ENGINES: Completely strips scale transformations on touch screens */
+        whileHover={isMobile ? undefined : { scale: 1.015, y: -1 }}
+        whileTap={isMobile ? { scale: 0.98 } : { scale: 0.99, y: 0 }}
+        style={{ transform: "translateZ(0)" }} // Forces immediate GPU layer acceleration
+        className="group relative overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-100 text-zinc-800 border border-zinc-200/80 rounded-xl shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-colors duration-150 md:hover:bg-zinc-200/50 cursor-pointer"
       >
         <motion.div variants={containerVariants} className="relative z-10 flex items-center gap-2.5 font-sans text-[11px] font-semibold tracking-[0.15em] uppercase">
           <svg
-            className="w-4 h-4 text-zinc-500 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:text-zinc-900"
+            className="w-4 h-4 text-zinc-500 transition-transform duration-300 ease-out md:group-hover:-translate-y-0.5 md:group-hover:text-zinc-900"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
