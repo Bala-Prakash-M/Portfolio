@@ -1,87 +1,101 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
 
 export default function Footer() {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
+  const [isMobile, setIsMobile] = useState(false);
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 12 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 640);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   return (
     <motion.footer
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-20px" }}
-      variants={containerVariants}
-      className="relative w-full bg-[#161618] text-zinc-100 mt-32 select-none"
+      /* SINGLE ACCELERATED TRIGGER: Replaces layout-heavy staggers with one clean, unified GPU fade */
+      initial={{ opacity: 0, y: isMobile ? 12 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: isMobile ? "0px" : "-40px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      style={{ transform: "translateZ(0)" }}
+      className="w-full bg-[#111111] text-zinc-400 mt-32 pt-16 pb-8 px-6 md:px-12 select-none"
     >
-      {/* ====================================================================
-          CINEMATIC FILM STRIP PATTERN
-          Signals the "end of the reel / end of the movie"
-         ==================================================================== */}
-      <div className="absolute top-0 left-0 w-full h-[32px] overflow-hidden transform -translate-y-[99%] pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            {/* Repeating 35mm perforation pattern */}
-            <pattern id="film-edge" width="64" height="32" patternUnits="userSpaceOnUse">
-              {/* The base charcoal canvas extending upward */}
-              <rect width="64" height="32" fill="#161618" />
-              {/* The cut-out holes revealing the warm off-white background above it */}
-              <rect x="24" y="10" width="16" height="12" rx="2.5" fill="#FAF9F6" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#film-edge)" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-8 pt-8 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4">
+      <div className="max-w-7xl mx-auto flex flex-col">
+        
+        {/* TOP ROW: Large Typographic Anchor & Edition Timestamp */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-8">
+          <div className="flex flex-col">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500 mb-3">
+              Portfolio
+            </span>
+            <h2 className="text-zinc-100 text-3xl md:text-5xl tracking-tight font-medium">
+              Bala Prakash M.
+            </h2>
+          </div>
           
-          {/* 1. OUTRO / IDENTITY (Left aligned) */}
-          <motion.div variants={itemVariants} className="flex flex-col space-y-2">
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-400">
-              Identity
+          <div className="flex flex-col items-start md:items-end">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500 mb-2 md:mb-3">
+              Last updated
             </span>
-            <span className="font-mono text-[13px] text-zinc-300">
-              Designed & Engineered by <span className="text-white font-semibold">Bala Prakash</span>
+            <span className="font-mono text-[12px] text-zinc-300">
+              July, 2026
             </span>
-          </motion.div>
+          </div>
+        </div>
 
-          {/* 2. BUILT WITH (Center aligned on desktop) */}
-          <motion.div variants={itemVariants} className="flex flex-col space-y-2 md:items-center">
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-400">
-              Built With
+        {/* BOTTOM ROW: The Colophon Grid (Razor-thin borders mimic print layouts) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 border-t border-zinc-800 pt-10">
+          
+          {/* Spec 1 */}
+          <div className="flex flex-col space-y-2">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+              I do
             </span>
-            <span className="font-mono text-[13px] text-zinc-300 text-center">
-              Next.js &bull; Typescript &bull; Tailwind CSS &bull; Framer &bull; Bun
+            <span className="font-sans text-[13px] text-zinc-300">
+              Full Stack Engineering 
             </span>
-          </motion.div>
+          </div>
 
-          {/* 3. LAST UPDATED (Right aligned on desktop) */}
-          <motion.div variants={itemVariants} className="flex flex-col space-y-2 md:items-end">
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-zinc-400">
-              Last Updated
+          {/* Spec 2 */}
+          <div className="flex flex-col space-y-2">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+              Built with
             </span>
-            <span className="font-mono text-[13px] text-zinc-300">
-              July 2026
+            <span className="font-sans text-[13px] text-zinc-300 leading-relaxed">
+              Next.js, 
+              <br />Typescript, 
+              <br />Tailwind,
+              <br /> Framer Motion, 
+              <br />Bun
             </span>
-          </motion.div>
+          </div>
+
+          {/* Spec 3 */}
+          
+<div className="col-span-2 flex flex-col space-y-2 md:items-end text-left md:text-right">
+  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+    Ready to
+  </span>
+  
+  {/* Added 'leading-relaxed' to give the sentences elegant vertical spacing when they naturally wrap on small screens */}
+  <span className="font-sans text-[13px] text-zinc-300 leading-relaxed">
+    Software Engineering Internships.
+    <br /> Freelance Products.
+    <br /> Product Collaborations.
+  </span>
+</div>
 
         </div>
+
+        {/* COPYRIGHT BASELINE */}
+        <div className="mt-16 md:mt-24 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-600">
+          <span>&copy; {new Date().getFullYear()}</span>
+          <span>All Rights Reserved</span>
+        </div>
+
       </div>
     </motion.footer>
   );
