@@ -13,9 +13,9 @@ export default function Projects() {
   
 
   return (
-    <section className="w-full min-h-[640px] py-16 px-6 md:px-8 max-w-7xl mx-auto border-t border-zinc-200/60 bg-[#FAF9F6] text-zinc-900 select-none">
+    <section className="w-full pt-16 pb-6 px-6 md:px-8 max-w-7xl mx-auto border-t border-zinc-200/60 bg-[#FAF9F6] text-zinc-900 select-none">
 
-      <SectionHeader title="Projects" />
+      <SectionHeader title="3. Projects" />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         

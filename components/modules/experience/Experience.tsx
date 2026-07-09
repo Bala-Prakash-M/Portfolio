@@ -77,7 +77,7 @@ export default function Experience() {
       id="experience"
       className="relative z-10 w-full pt-4 pb-24 px-6 md:px-8 max-w-7xl mx-auto border-t border-zinc-100 mt-12 select-none"
     >
-      <SectionHeading title="Experience" />
+      <SectionHeading title="2. Experience" />
 
       <motion.div 
         variants={listVariants}

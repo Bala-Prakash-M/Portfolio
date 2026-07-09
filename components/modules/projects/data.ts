@@ -115,8 +115,6 @@ export const selectedWork: Project[] = [
 
     stack: [
       "React",
-      "Node.js",
-      "Express.js",
       "Solana Web3.js",
       "BIP39",
       "Ed25519",

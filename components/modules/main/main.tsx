@@ -3,6 +3,7 @@ import HeroBackground from "@/components/modules/hero/HeroBackground";
 import AboutSection from "@/components/modules/about/About";
 import Experience from "@/components/modules/experience/Experience";
 import Projects from "@/components/modules/projects/Projects";
+import Contact from "@/components/modules/contact/Contact";
 
 export default function Main() {
   return (
@@ -12,6 +13,7 @@ export default function Main() {
       <AboutSection />
       <Experience />
       <Projects />
+      <Contact />
     </>
   );
 }

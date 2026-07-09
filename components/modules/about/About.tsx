@@ -57,7 +57,7 @@ export default function AboutSection() {
       id="about"
       className="relative z-10 w-full pt-4 pb-24 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden"
     >
-      <SectionHeading title="Who I am?" />
+      <SectionHeading title="1. Who I am?" />
 
       {/* Changed parent wrapper to standard div to prevent top-level trigger spillover */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6 items-start">
