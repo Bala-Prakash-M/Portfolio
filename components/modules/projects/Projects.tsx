@@ -13,7 +13,7 @@ export default function Projects() {
   
 
   return (
-    <section className="w-full pt-16 pb-6 px-6 md:px-8 max-w-7xl mx-auto border-t border-zinc-200/60 bg-[#FAF9F6] text-zinc-900 select-none">
+    <section className="w-full pt-16 pb-6 px-6 md:px-8 max-w-7xl mx-auto border-t border-zinc-200/60 text-zinc-900 select-none">
 
       <SectionHeader title="3. Projects" />
 

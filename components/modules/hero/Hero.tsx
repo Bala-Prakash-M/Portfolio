@@ -13,7 +13,7 @@ interface HeroProps {
 
 export default function Hero({ onNavigate }: HeroProps) {
   return (
-    <section className="relative min-h-screen w-full bg-[#FAF9F6] text-zinc-800 flex flex-col justify-between p-6 md:p-8 select-none">
+    <section className="relative min-h-screen w-full text-zinc-800 flex flex-col justify-between p-6 md:p-8 select-none">
       {/* 1. GLOBAL NAVIGATION HEADER LAYER */}
       <Header onNavigate={onNavigate}/>
 

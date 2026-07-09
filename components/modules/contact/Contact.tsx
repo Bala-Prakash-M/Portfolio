@@ -36,13 +36,9 @@ export default function Contact() {
   };
 
   return (
-    /* FIX PART 1: The outer section is now a completely static semantic wrapper. 
-       This anchors the off-white color directly into the browser layout layer from frame one, 
-       permanently eliminating the white block flash anomaly during hydration.
-    */
     <section
       id="contact"
-      className="w-full pt-4 pb-12 px-6 md:px-8 max-w-7xl mx-auto bg-[#FAF9F6] text-zinc-900 select-none"
+      className="w-full pt-4 pb-12 px-6 md:px-8 max-w-7xl mx-auto text-zinc-900 select-none"
     >
       {/* FIX PART 2: We delegate the on-scroll visibility handling to an inner animation group container */}
       <motion.div
