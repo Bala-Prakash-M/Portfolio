@@ -64,9 +64,18 @@ export default function Header({ onNavigate }: HeaderProps) {
         className="fixed top-6 inset-x-0 z-[60] flex justify-end sm:justify-center pointer-events-none px-6 sm:px-4"
       >
         <motion.nav
-          /* STATIC LOCK: Keeps width open and opacity solid right from frame one on mobile */
           initial={isMobile ? { width: "auto", opacity: 1 } : { width: 44, opacity: 0 }}
-          animate={{ width: "auto", opacity: 1 }}
+          /* DYNAMIC DESKTOP EXPANSION: 
+             If mobile -> always full width. 
+             If desktop -> shrinks to 44px when hidden, springs to 'auto' when revealed. 
+          */
+          animate={
+            isMobile
+              ? { width: "auto", opacity: 1 }
+              : hidden
+              ? { width: 44, opacity: 0 }
+              : { width: "auto", opacity: 1 }
+          }
           transition={
             isMobile
               ? { duration: 0 } // No computation runtime overhead on mobile devices

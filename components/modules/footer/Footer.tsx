@@ -24,7 +24,6 @@ export default function Footer() {
       className="w-full bg-[#111111] text-zinc-400 mt-32 pt-16 pb-8 px-6 md:px-12 select-none"
     >
       <div className="max-w-7xl mx-auto flex flex-col">
-        
         {/* TOP ROW: Large Typographic Anchor & Edition Timestamp */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-8">
           <div className="flex flex-col">
@@ -35,7 +34,7 @@ export default function Footer() {
               Bala Prakash M.
             </h2>
           </div>
-          
+
           <div className="flex flex-col items-start md:items-end">
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500 mb-2 md:mb-3">
               Last updated
@@ -48,14 +47,13 @@ export default function Footer() {
 
         {/* BOTTOM ROW: The Colophon Grid (Razor-thin borders mimic print layouts) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 border-t border-zinc-800 pt-10">
-          
           {/* Spec 1 */}
           <div className="flex flex-col space-y-2">
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
               I do
             </span>
             <span className="font-sans text-[13px] text-zinc-300">
-              Full Stack Engineering 
+              Full Stack Engineering
             </span>
           </div>
 
@@ -65,29 +63,31 @@ export default function Footer() {
               Built with
             </span>
             <span className="font-sans text-[13px] text-zinc-300 leading-relaxed">
-              Next.js, 
-              <br />Typescript, 
-              <br />Tailwind,
-              <br /> Framer Motion, 
-              <br />Bun
+              Next.js,
+              <br />
+              Typescript,
+              <br />
+              Tailwind,
+              <br /> Framer Motion,
+              <br />
+              Bun
             </span>
           </div>
 
           {/* Spec 3 */}
-          
-<div className="col-span-2 flex flex-col space-y-2 md:items-end text-left md:text-right">
-  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
-    Ready to
-  </span>
-  
-  {/* Added 'leading-relaxed' to give the sentences elegant vertical spacing when they naturally wrap on small screens */}
-  <span className="font-sans text-[13px] text-zinc-300 leading-relaxed">
-    Software Engineering Internships.
-    <br /> Freelance Products.
-    <br /> Product Collaborations.
-  </span>
-</div>
 
+          <div className="col-span-2 flex flex-col space-y-2 md:items-end text-left md:text-right">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+              Ready to
+            </span>
+
+            {/* Added 'leading-relaxed' to give the sentences elegant vertical spacing when they naturally wrap on small screens */}
+            <span className="font-sans text-[13px] text-zinc-300 leading-relaxed">
+              Software Engineering Internships.
+              <br /> Freelance Products.
+              <br /> Product Collaborations.
+            </span>
+          </div>
         </div>
 
         {/* COPYRIGHT BASELINE */}
@@ -95,7 +95,6 @@ export default function Footer() {
           <span>&copy; {new Date().getFullYear()}</span>
           <span>All Rights Reserved</span>
         </div>
-
       </div>
     </motion.footer>
   );
