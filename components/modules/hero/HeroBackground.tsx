@@ -47,20 +47,28 @@ export default function HeroBackground() {
           background: [
             // 1. Start: Vivid Coral
             "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
+            
             // 2. Neon Magenta / Pink
             "radial-gradient(circle, #FF007F 0%, transparent 60%)",
+            
             // 3. Electric Violet
             "radial-gradient(circle, #7C3AED 0%, transparent 60%)",
-            // 4. Electric Cyan / Neon Blue
-            "radial-gradient(circle, #00F0FF 0%, transparent 60%)",
-            // 5. High-Voltage Lime
-            "radial-gradient(circle, #39FF14 0%, transparent 60%)",
-            // 6. Laser Yellow
-            "radial-gradient(circle, #FFEA00 0%, transparent 60%)",
+            
+            // 4. Deep Indigo (Sophisticated transition from Violet)
+            "radial-gradient(circle, #4F46E5 0%, transparent 60%)",
+            
+            // 5. Bordeaux / Rich Plum (Deep, editorial depth)
+            "radial-gradient(circle, #9D174D 0%, transparent 60%)",
+            
+            // 6. Warm Amber / Burnished Gold (Luxurious earth tone)
+            "radial-gradient(circle, #D97706 0%, transparent 60%)",
+            
             // 7. Vivid Tangerine
             "radial-gradient(circle, #FF6600 0%, transparent 60%)",
+            
             // 8. Royal Crimson
             "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
+            
             // 9. END: Perfectly match start for seamless loop
             "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
           ],
