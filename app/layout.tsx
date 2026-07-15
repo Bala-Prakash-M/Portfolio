@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import metaImage from "@/public/image.png";
 
 // 1. Initialize our hand-picked typography system
 const sansFont = Inter({
@@ -34,9 +33,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: metaImage.src,
-        width: metaImage.width,
-        height: metaImage.height,
+        url: "https://res.cloudinary.com/dkp3wdik8/image/upload/v1784141382/7ec7c2a7-9e1b-424c-8e70-53239b8fe425_jwkofr.png",
+        width: 1200, // Ideal width for standard modern display ratios
+        height: 630, // Ideal height to prevent vertical squash
         alt: "Bala Prakash Portfolio Preview",
       },
     ],
@@ -47,10 +46,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bala Prakash | Full-Stack Software Engineer",
     description: "Portfolio of Bala Prakash, building production-ready full-stack applications.",
-    images: [metaImage.src], // Twitter accepts a clean string URL array
+    images: ["https://res.cloudinary.com/dkp3wdik8/image/upload/v1784141382/7ec7c2a7-9e1b-424c-8e70-53239b8fe425_jwkofr.png"],
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
