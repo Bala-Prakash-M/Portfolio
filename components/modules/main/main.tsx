@@ -43,10 +43,6 @@ export default function Main() {
         <HeroBackground />
       </div>
 
-      {/* CONTENT CORNER: 
-          Forcing relative z-10 stops hardware-accelerated fixed backgrounds 
-          from clipping or swallowing your section elements during viewport scrolls.
-      */}
       <div className="relative z-10 w-full">
         {/* Pass the controller into Hero where your navbar menu lives */}
         <Hero onNavigate={handleScrollToSection} />

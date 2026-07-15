@@ -1,11 +1,16 @@
+"use client";
+
 import { motion } from "framer-motion";
 
 interface MobileHeaderProps {
-  setMenuOpen(menuOpen: boolean): void
-  onNavigate: (item: string) => void
+  setMenuOpen(menuOpen: boolean): void;
+  onNavigate: (item: string) => void;
 }
 
-export default function MobileHeader({ setMenuOpen, onNavigate }: MobileHeaderProps) {
+export default function MobileHeader({
+  setMenuOpen,
+  onNavigate,
+}: MobileHeaderProps) {
   const navItems = ["About", "Experience", "Projects", "Contact", "Resume"];
   return (
     <motion.div
@@ -16,6 +21,27 @@ export default function MobileHeader({ setMenuOpen, onNavigate }: MobileHeaderPr
       // Frosted glass overlay taking up the whole screen
       className="fixed inset-0 z-50 flex flex-col bg-[#FAF9F6]/95 backdrop-blur-2xl sm:hidden pt-32 px-8 pb-12"
     >
+      {/* SENSORY CLOSE BUTTON */}
+      <button
+        onClick={() => setMenuOpen(false)}
+        className="absolute top-8 right-8 flex items-center justify-center w-10 h-10 rounded-full border border-zinc-200/50 bg-white/40 text-zinc-800 transition-all active:scale-90"
+        aria-label="Close menu"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
       <div className="flex flex-col h-full justify-between">
         {/* Top: Header Nav Links */}
         <nav className="flex flex-col gap-6">
@@ -23,7 +49,7 @@ export default function MobileHeader({ setMenuOpen, onNavigate }: MobileHeaderPr
             <a
               key={item}
               onClick={() => {
-                setMenuOpen(false)
+                setMenuOpen(false);
                 onNavigate(item);
               }} // Close menu when a link is clicked
               className="text-3xl font-bold tracking-tight text-zinc-900 border-b border-zinc-200/50 pb-4"
@@ -40,6 +66,27 @@ export default function MobileHeader({ setMenuOpen, onNavigate }: MobileHeaderPr
             Connect
           </span>
           <div className="flex items-center gap-8 text-zinc-600">
+            {/* EMAIL */}
+            <a
+              href="mailto:your@email.com"
+              className="hover:text-zinc-950 transition-colors"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </a>
+
+            {/* GITHUB */}
             <a
               href="https://github.com"
               target="_blank"
@@ -70,22 +117,17 @@ export default function MobileHeader({ setMenuOpen, onNavigate }: MobileHeaderPr
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
+
+            {/* TWITTER / X ICON */}
             <a
-              href="mailto:your@email.com"
+              href="https://x.com"
+              target="_blank"
+              rel="noreferrer"
               className="hover:text-zinc-950 transition-colors"
+              aria-label="Visit Twitter/X profile"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
             </a>
           </div>
