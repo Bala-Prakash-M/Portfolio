@@ -103,7 +103,7 @@ export default function Aside() {
         </span>
 
         <a
-          href="mailto:pbala1851@email.com"
+          href="mailto:pbala1851@gmail.com"
           className="hover:text-[#EA4335] transition-colors block p-1 active:scale-95 duration-200"
         >
           <svg
