@@ -14,7 +14,7 @@ export default function SocialButtons() {
   const socials: SocialItem[] = [
     {
       name: "Mail",
-      href: "mailto:pbala1851@email.com",
+      href: "mailto:pbala1851@gmail.com",
       tooltipText: "send_email",
       brandClass: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/30 hover:text-[#EA4335]",
       icon: (
