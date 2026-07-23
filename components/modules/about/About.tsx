@@ -41,10 +41,10 @@ export default function AboutSection() {
   };
 
   const quoteVariants: Variants = {
-    hidden: { opacity: 0, x: 12 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
         duration: 0.8,
         ease: [0.16, 1, 0.3, 1]
@@ -55,17 +55,18 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative z-10 w-full pt-4 pb-24 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden"
+      // CHANGED: Reduced pb-24 to pb-12 to pull the next section closer
+      className="relative z-10 w-full pt-4 pb-12 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden"
     >
       <SectionHeading title="1. Who am I?" />
 
-      {/* Changed parent wrapper to standard div to prevent top-level trigger spillover */}
+      {/* MAIN TWO-COLUMN GRID: Typography Left | Skills Right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-6 items-start">
         
-        {/* LEFT COLUMN: Clean, Borderless Typography */}
+        {/* LEFT COLUMN: Narrative Typography */}
         <div className="lg:col-span-7 space-y-12 text-zinc-600 tracking-wide select-none">
           
-          {/* 1. THE HERO HOOK — Triggers instantly as it enters viewport */}
+          {/* 1. THE HERO HOOK */}
           <motion.div 
             variants={typographyVariants}
             initial="hidden"
@@ -112,7 +113,7 @@ export default function AboutSection() {
             </p>
           </motion.div>
 
-          {/* 2. THE CONTEXT SUBGRID — Triggers independently down the layout trail */}
+          {/* 2. THE CONTEXT SUBGRID */}
           <motion.div 
             variants={subgridContainerVariants}
             initial="hidden"
@@ -144,7 +145,7 @@ export default function AboutSection() {
               </motion.div>
 
               <motion.div variants={typographyVariants} className="space-y-2">
-                <h4 className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400">
+                <h4 className="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-[#B3533B]/80">
                   Core Philosophy
                 </h4>
                 <p className="text-sm md:text-[15px] text-zinc-600 leading-relaxed font-normal">
@@ -192,27 +193,32 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* RIGHT COLUMN: Premium Minimalist Quote Placement */}
-        <div className="lg:col-span-5 flex flex-col justify-center h-full pt-6 lg:pt-12 lg:pl-12 border-t border-zinc-100 lg:border-t-0 lg:border-l lg:border-zinc-200/60">
-          <motion.blockquote 
-            variants={quoteVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-15%" }}
-            className="space-y-3"
-          >
-            <p className="text-zinc-400 italic text-lg sm:text-xl font-light leading-relaxed tracking-wide select-none">
-              “My destination is no longer a place, rather a new way of seeing.”
-            </p>
-            <footer className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#B3533B]/70 select-none">
-              — Marcel Proust
-            </footer>
-          </motion.blockquote>
+        {/* RIGHT COLUMN: Skills Component */}
+        <div className="lg:col-span-5 lg:pl-6">
+          <div className="[&>div]:mt-0 [&>div]:pt-0 [&>div]:border-t-0">
+            <Skills />
+          </div>
         </div>
+
       </div>
 
-      {/* Skills rendered underneath */}
-      <Skills />
+      {/* FULL WIDTH CENTERED QUOTE (Below Section Grid) */}
+      <div className="mt-20 pt-10 border-t border-zinc-200/60 flex justify-center text-center">
+        <motion.blockquote 
+          variants={quoteVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-10%" }}
+          className="max-w-xl space-y-3 px-4"
+        >
+          <p className="text-zinc-500 italic text-base sm:text-lg font-light leading-relaxed tracking-wide select-none">
+            “My destination is no longer a place, rather a new way of seeing.”
+          </p>
+          <footer className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#B3533B]/80 select-none">
+            — Marcel Proust
+          </footer>
+        </motion.blockquote>
+      </div>
     </section>
   );
 }
