@@ -100,12 +100,6 @@ const skillGroups: SkillGroup[] = [
         icon: SiFramer,
         brandColor: "text-[#0055FF]",
       },
-      {
-        name: "Axios",
-        desc: "Asynchronous network request lifecycle",
-        icon: SiAxios,
-        brandColor: "text-[#5A29E4]",
-      },
     ],
   },
   {
@@ -145,18 +139,6 @@ const skillGroups: SkillGroup[] = [
         desc: "Document database",
         icon: SiMongodb,
         brandColor: "text-[#47A248]",
-      },
-      {
-        name: "Mongoose",
-        desc: "MongoDB data modeling",
-        icon: SiMongoose,
-        brandColor: "text-[#880000]",
-      },
-      {
-        name: "SQL",
-        desc: "Managing structured data",
-        icon: DiDatabase,
-        brandColor: "text-[#00758F]",
       },
       {
         name: "PostgreSQL",

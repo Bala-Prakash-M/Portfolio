@@ -3,57 +3,9 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import SectionHeading from "@/components/shared/components/SectionHeading";
-
-interface MetadataItem {
-  label: string;
-  value: string;
-}
-
-interface ExperienceItem {
-  role: string;
-  period: string;
-  meta: MetadataItem[];
-  bullets: React.ReactNode[];
-  stack: string[];
-}
+import { experiences } from "./data";
 
 export default function Experience() {
-  const experiences: ExperienceItem[] = [
-    {
-      role: "Freelance Full-Stack Developer",
-      period: "Mar 2026 — Apr 2026",
-      meta: [
-        { label: "Engagement", value: "Freelance Client" },
-        { label: "Project", value: "Production Ecommerce" },
-        { label: "Team", value: "2 Developers" },
-        { label: "Location", value: "Remote · Tamil Nadu, India" }
-      ],
-      bullets: [
-        <>
-          Delivered a <span className="text-zinc-950 font-semibold">production-ready ecommerce platform</span> for a real client, leading end-to-end development across the frontend, backend, database design, deployment, and post-launch maintenance.
-        </>,
-        <>
-          Designed scalable backend services for authentication, cart workflows, checkout, payments, order management, and role-based access using <span className="text-zinc-950 font-medium">RESTful API architecture</span>.
-        </>,
-        <>
-          Developed over <span className="text-zinc-950 font-semibold font-mono">90%</span> of the backend codebase while collaborating in a two-developer team using <span className="text-zinc-950 font-medium">Git-based branching</span> and version control workflows.
-        </>,
-        <>
-          Improved backend API response times by <span className="text-zinc-950 font-semibold font-mono">50–67%</span> (<span className="text-zinc-950 font-semibold font-mono">600ms → 200–300ms</span>) through target <span className="text-zinc-950 font-medium">database query optimization</span> and backend performance tuning.
-        </>
-      ],
-      stack: [
-        "React",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS",
-        "Framer Motion",
-        "JWT",
-        "Google OAuth",
-        "Cloudinary"
-      ]
-    }
-  ];
 
   const listVariants: Variants = {
     hidden: { opacity: 0 },
@@ -92,22 +44,22 @@ export default function Experience() {
             variants={itemVariants}
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
           >
-            {/* LEFT COLUMN: Period timeline marker + Metadata block grouped safely together */}
+            {/* LEFT COLUMN: Period timeline marker + Metadata block */}
             <div className="lg:col-span-3 space-y-6 pt-1">
               
               {/* Timeline marker */}
-              <div className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#B3533B]">
+              <div className="font-mono text-[12.5px] font-bold uppercase tracking-[0.2em] text-[#B3533B]">
                 {exp.period}
               </div>
 
-              {/* Vertical Metadata Stream for clean side scanning */}
-              <div className="space-y-3.5 pt-1 border-t border-zinc-100 lg:border-t-0 lg:pt-0">
+              {/* Vertical Metadata Stream */}
+              <div className="space-y-4 pt-1 border-t border-zinc-100 lg:border-t-0 lg:pt-0">
                 {exp.meta.map((item) => (
                   <div key={item.label} className="space-y-0.5">
-                    <div className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest">
+                    <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-widest">
                       {item.label}
                     </div>
-                    <p className="text-[12px] font-medium text-zinc-700 tracking-wide leading-tight">
+                    <p className="text-[13.5px] font-medium text-zinc-700 tracking-wide leading-snug">
                       {item.value}
                     </p>
                   </div>
@@ -116,40 +68,39 @@ export default function Experience() {
 
             </div>
 
-            {/* RIGHT COLUMN: Execution Profile Core (Role, Narrative Case Bulletins, Stack Arrays) */}
+            {/* RIGHT COLUMN: Execution Profile Core */}
             <div className="lg:col-span-9 space-y-6">
               
               {/* Role Context Profile */}
               <div>
-                <h3 className="text-xl font-normal text-zinc-950 tracking-wide leading-tight">
+                <h3 className="text-2xl font-normal text-zinc-950 tracking-wide leading-tight">
                   {exp.role}
                 </h3>
               </div>
 
-              {/* Structured Work Bulletins Container (Max-W-2xl for optimal character reading bounds) */}
-              <div className="max-w-2xl space-y-3.5">
+              {/* Structured Work Bulletins Container */}
+              <div className="max-w-2xl space-y-4">
                 {exp.bullets.map((bullet, idx) => (
                   <p 
                     key={idx} 
-                    className="text-zinc-600 text-base leading-relaxed font-normal tracking-wide text-justify"
+                    className="text-zinc-600 text-[17px] leading-relaxed font-normal tracking-wide text-justify"
                   >
                     {bullet}
                   </p>
                 ))}
               </div>
 
-              {/* Architecture Deployment Stack Chips */}
               {/* Technology Architecture Section */}
               <div className="space-y-2.5 pt-4">
-                <div className="font-mono text-[9px] font-bold text-zinc-400 uppercase tracking-widest">
+                <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-widest">
                   Tech Stack
                 </div>
                 
-                <div className="flex flex-wrap gap-1.5 max-w-2xl">
+                <div className="flex flex-wrap gap-2 max-w-2xl">
                   {exp.stack.map((tech) => (
                     <span 
                       key={tech} 
-                      className="px-2.5 py-1 rounded-md bg-white border border-zinc-200/80 font-mono text-[10px] font-medium text-zinc-600 tracking-tight shadow-[0_1px_3px_rgba(0,0,0,0.02)] select-none transition-colors duration-150 hover:border-zinc-300 hover:text-zinc-900"
+                      className="px-3 py-1 rounded-md bg-white border border-zinc-200/80 font-mono text-[11.5px] font-medium text-zinc-600 tracking-tight shadow-[0_1px_3px_rgba(0,0,0,0.02)] select-none transition-colors duration-150 hover:border-zinc-300 hover:text-zinc-900"
                     >
                       {tech}
                     </span>
