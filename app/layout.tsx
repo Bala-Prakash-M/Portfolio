@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://res.cloudinary.com/dkp3wdik8/image/upload/v1784141382/7ec7c2a7-9e1b-424c-8e70-53239b8fe425_jwkofr.png",
+        url: "https://res.cloudinary.com/dkp3wdik8/image/upload/v1784816120/625c1343-a9a9-4325-b8f0-26581088cc47_pqlw90.png",
         width: 1200, // Ideal width for standard modern display ratios
         height: 630, // Ideal height to prevent vertical squash
         alt: "Bala Prakash Portfolio Preview",
