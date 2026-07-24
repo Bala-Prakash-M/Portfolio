@@ -15,7 +15,7 @@ export default function Main() {
   const handleScrollToSection = (item: string) => {
     if (item === "Resume") {
       window.open(
-        "https://drive.google.com/file/d/1uxNhwvUL6Ciuckfxo6otROKxmIfInv1z/view?usp=drive_link",
+        "https://drive.google.com/file/d/1pkcLNg_pNII5o5xc1eqiD8NnEPCbKv8a/view?usp=drive_link",
         "_blank",
       );
       return;
