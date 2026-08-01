@@ -69,7 +69,8 @@ export default function RightPart({ activeProject }: RightPartProps) {
             </h2>
 
             <p className="text-[13.5px] font-mono text-[#B3533B] tracking-wide pt-0.5 italic">
-              {activeProject.philosophy || "Designed for production, not demonstration."}
+              {activeProject.philosophy ||
+                "Designed for production, not demonstration."}
             </p>
           </motion.div>
 
@@ -81,16 +82,28 @@ export default function RightPart({ activeProject }: RightPartProps) {
             className="grid grid-cols-3 gap-4 py-3.5 border-y border-zinc-200/60"
           >
             <div>
-              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">Type</div>
-              <div className="text-[13.5px] font-medium text-zinc-800 truncate">{activeProject.meta.type}</div>
+              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">
+                Type
+              </div>
+              <div className="text-[13.5px] font-medium text-zinc-800 truncate">
+                {activeProject.meta.type}
+              </div>
             </div>
             <div>
-              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">Team</div>
-              <div className="text-[13.5px] font-medium text-zinc-800 truncate">{activeProject.meta.team}</div>
+              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">
+                Team
+              </div>
+              <div className="text-[13.5px] font-medium text-zinc-800 truncate">
+                {activeProject.meta.team}
+              </div>
             </div>
             <div>
-              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">Duration</div>
-              <div className="text-[13.5px] font-medium text-zinc-800 truncate">{activeProject.meta.duration}</div>
+              <div className="font-mono text-[10.5px] font-bold text-zinc-400 uppercase tracking-wider mb-0.5">
+                Duration
+              </div>
+              <div className="text-[13.5px] font-medium text-zinc-800 truncate">
+                {activeProject.meta.duration}
+              </div>
             </div>
           </motion.div>
 
@@ -98,7 +111,9 @@ export default function RightPart({ activeProject }: RightPartProps) {
               ROW 3: OVERVIEW BLOCK (With Read More expand state for mobile)
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-1">
-            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Overview</h4>
+            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">
+              Overview
+            </h4>
             <div>
               <p
                 className={`text-zinc-600 text-[16px] leading-relaxed tracking-wide text-justify font-normal max-w-2xl transition-all duration-200 ${
@@ -107,14 +122,16 @@ export default function RightPart({ activeProject }: RightPartProps) {
               >
                 {activeProject.overview}
               </p>
-              
-              {/* Mobile-only toggle trigger */}
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="mt-1 font-mono text-[12px] font-bold text-[#B3533B] tracking-wide underline underline-offset-4 md:hidden focus:outline-none"
-              >
-                {isExpanded ? "Read Less ↑" : "Read More ↓"}
-              </button>
+
+              {/* Mobile-only toggle trigger - Aligned to Right */}
+              <div className="flex justify-end md:hidden">
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="mt-1.5 font-mono text-[12px] font-bold text-[#B3533B] tracking-wide underline underline-offset-4 focus:outline-none cursor-pointer"
+                >
+                  {isExpanded ? "Read Less ↑" : "Read More ↓"}
+                </button>
+              </div>
             </div>
           </motion.div>
 
@@ -122,7 +139,9 @@ export default function RightPart({ activeProject }: RightPartProps) {
               ROW 4: ENGINEERING HIGHLIGHTS GRID
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-1.5">
-            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Engineering Highlights</h4>
+            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">
+              Engineering Highlights
+            </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 pt-0.5">
               {activeProject.highlights.map((highlight, index) => (
                 <div
@@ -141,7 +160,9 @@ export default function RightPart({ activeProject }: RightPartProps) {
               ROW 5: INLINE TECH BUILT STACK
              ==================================================================== */}
           <motion.div variants={childVariants} className="space-y-1">
-            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Built With</h4>
+            <h4 className="font-mono text-[11px] font-bold text-zinc-400 uppercase tracking-widest">
+              Built With
+            </h4>
             <div className="text-[13.5px] font-mono text-zinc-600 leading-relaxed max-w-2xl tracking-tight">
               {activeProject.stack.reduce(
                 (acc, curr, i) => [

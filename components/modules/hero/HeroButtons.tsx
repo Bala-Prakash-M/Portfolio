@@ -58,11 +58,15 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
       {/* LEFT PRIMARY BUTTON */}
       <motion.div
         variants={slideUpVariants}
-        className="relative inline-block w-full sm:w-auto p-[1.5px] rounded-[13px] overflow-hidden group/btn-wrapper bg-zinc-950"
+        whileTap={{
+          scale: 0.98,
+          transition: { duration: 0.1 },
+        }}
+        className="group/btn-wrapper relative inline-block w-full sm:w-auto p-[1.5px] rounded-[13px] overflow-hidden bg-zinc-950 cursor-pointer shadow-sm"
       >
         {/* 1. CONTINUOUS ROTATING NEON BORDER BEAM */}
         <motion.div
-          className="absolute -inset-[200%] z-0 pointer-events-none opacity-85 group-hover/btn-wrapper:opacity-100 transition-opacity duration-300"
+          className="absolute -inset-[200%] z-0 pointer-events-none opacity-80 group-hover/btn-wrapper:opacity-100 transition-opacity duration-300 will-change-transform"
           style={{
             background:
               "conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 280deg, #B3533B 310deg, #FF7A59 340deg, #FFFFFF 360deg)",
@@ -77,7 +81,7 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
 
         {/* 2. SUBTLE AMBIENT OUTER GLOW */}
         <motion.div
-          className="absolute -inset-[200%] z-0 pointer-events-none opacity-40 blur-[5px]"
+          className="absolute -inset-[200%] z-0 pointer-events-none opacity-40 blur-[6px] will-change-transform"
           style={{
             background:
               "conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 290deg, #FF7A59 330deg, #FFFFFF 360deg)",
@@ -90,25 +94,21 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
           }}
         />
 
-        {/* 3. BUTTON CONTENT WITH HOVER & TAP INTERACTIONS */}
-        <motion.button
+        {/* 3. INNER BUTTON FACE */}
+        <button
           onClick={() => onNavigate("Experience")}
-          /* PERFORMANCE ENGINES: Completely strips scale transformations on touch screens */
-          whileHover={isMobile ? undefined : { scale: 1.015, y: -1 }}
-          whileTap={isMobile ? { scale: 0.98 } : { scale: 0.99, y: 0 }}
-          style={{ transform: "translateZ(0)" }} // Forces immediate GPU layer acceleration
-          className="group relative z-10 overflow-hidden flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-800/80 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.06)] transition-shadow duration-150 md:hover:shadow-lg md:hover:shadow-zinc-900/15 cursor-pointer"
+          className="relative z-10 flex items-center justify-center w-full sm:w-auto px-7 py-3.5 bg-zinc-900 text-[#FAF9F6] border border-zinc-800/80 rounded-xl overflow-hidden cursor-pointer"
         >
           {/* 4. PERIODIC DIAGONAL SHINE SWEEP */}
           <motion.div
-            className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12 pointer-events-none"
+            className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12 pointer-events-none"
             animate={{
               x: ["-150%", "200%"],
             }}
             transition={{
               duration: 2.2,
               repeat: Infinity,
-              repeatDelay: 2.5,
+              repeatDelay: 2.8,
               ease: "easeInOut",
             }}
           />
@@ -118,8 +118,10 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
             className="relative z-10 flex items-center gap-2.5 font-sans text-[11px] font-semibold tracking-[0.15em] uppercase"
           >
             <span>{"View My Work"}</span>
+
+            {/* 5. SMOOTH ARROW SHIFT ON HOVER */}
             <svg
-              className="w-3.5 h-3.5 text-zinc-400 transition-transform duration-300 ease-out md:group-hover:translate-x-0.5 md:group-hover:-translate-y-0.5 md:group-hover:text-zinc-100"
+              className="w-3.5 h-3.5 text-zinc-400 transition-all duration-200 ease-out group-hover/btn-wrapper:translate-x-0.5 group-hover/btn-wrapper:-translate-y-0.5 group-hover/btn-wrapper:text-zinc-100"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -132,7 +134,7 @@ export default function HeroButtons({ onNavigate }: HeroButtonProps) {
               />
             </svg>
           </motion.div>
-        </motion.button>
+        </button>
       </motion.div>
 
       {/* RIGHT SECONDARY BUTTON */}
