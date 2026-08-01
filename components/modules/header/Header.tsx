@@ -11,7 +11,7 @@ import MobileHeader from "./MobileHeader";
 import HamburgerMenu from "./HamburgerMenu";
 
 interface HeaderProps {
-  onNavigate: (item: string) => void
+  onNavigate: (item: string) => void;
 }
 
 export default function Header({ onNavigate }: HeaderProps) {
@@ -64,7 +64,9 @@ export default function Header({ onNavigate }: HeaderProps) {
         className="fixed top-6 inset-x-0 z-[60] flex justify-end sm:justify-center pointer-events-none px-6 sm:px-4"
       >
         <motion.nav
-          initial={isMobile ? { width: "auto", opacity: 1 } : { width: 44, opacity: 0 }}
+          initial={
+            isMobile ? { width: "auto", opacity: 1 } : { width: 44, opacity: 0 }
+          }
           /* DYNAMIC DESKTOP EXPANSION: 
              If mobile -> always full width. 
              If desktop -> shrinks to 44px when hidden, springs to 'auto' when revealed. 
@@ -73,8 +75,8 @@ export default function Header({ onNavigate }: HeaderProps) {
             isMobile
               ? { width: "auto", opacity: 1 }
               : hidden
-              ? { width: 44, opacity: 0 }
-              : { width: "auto", opacity: 1 }
+                ? { width: 44, opacity: 0 }
+                : { width: "auto", opacity: 1 }
           }
           transition={
             isMobile
@@ -87,7 +89,8 @@ export default function Header({ onNavigate }: HeaderProps) {
           {/* 1. Home Button */}
           <a
             href="#"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setMenuOpen(false);
               onNavigate("home");
             }}
@@ -109,31 +112,42 @@ export default function Header({ onNavigate }: HeaderProps) {
             </svg>
           </a>
 
-          {/* 2. Desktop Navigation Links */}
-          <div className="hidden sm:flex items-center gap-4 sm:gap-6 whitespace-nowrap">
+          {/* 2. Desktop Navigation Links (Text-Up Kinetic Slide Hover) */}
+          <div className="hidden sm:flex items-center gap-6 sm:gap-8 whitespace-nowrap">
             {["About", "Experience", "Projects", "Contact", "Resume"].map(
               (item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  onClick={() => onNavigate(item)}
-                  className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-700 hover:text-zinc-950 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(item);
+                  }}
+                  className="group relative overflow-hidden py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em]"
                 >
-                  {item}
+                  {/* BASE TEXT (SLIDES UP) */}
+                  <span className="block text-zinc-700 transition-transform duration-300 ease-out group-hover:-translate-y-full">
+                    {item}
+                  </span>
+
+                  {/* HOVER ACCENT TEXT (SLIDES IN FROM BOTTOM) */}
+                  <span className="absolute inset-0 block translate-y-full text-[#B3533B] transition-transform duration-300 ease-out group-hover:translate-y-0 py-1">
+                    {item}
+                  </span>
                 </a>
               ),
             )}
           </div>
 
           {/* 3. Mobile Hamburger Button */}
-          <HamburgerMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen}/>
+          <HamburgerMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} />
         </motion.nav>
       </motion.div>
 
       {/* 4. Full Screen Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
-          <MobileHeader setMenuOpen={setMenuOpen} onNavigate={onNavigate}/>
+          <MobileHeader setMenuOpen={setMenuOpen} onNavigate={onNavigate} />
         )}
       </AnimatePresence>
     </>
