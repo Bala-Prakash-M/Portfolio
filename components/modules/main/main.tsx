@@ -45,7 +45,9 @@ export default function Main() {
 
       <div className="relative z-10 w-full">
         {/* Pass the controller into Hero where your navbar menu lives */}
-        <Hero onNavigate={handleScrollToSection} />
+        <div id="home">
+          <Hero onNavigate={handleScrollToSection} />
+        </div>
 
         {/* Anchor targets wrapping your sectional modules */}
         <div id="about">
