@@ -1,20 +1,42 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 interface SocialItem {
   name: string;
   href: string;
   tooltipText: string;
-  icon: React.ReactNode;
   brandClass: string;
+  icon: React.ReactNode;
+  emailAddress?: string;
 }
 
 export default function SocialButtons() {
+  const [copiedName, setCopiedName] = useState<string | null>(null);
+
+  const handleEmailClick = (email: string, name: string) => {
+    // 1. Copy email address to clipboard
+    if (typeof window !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(email);
+    }
+    
+    setCopiedName(name);
+
+    setTimeout(() => {
+      setCopiedName(null);
+    }, 2500);
+
+    // 2. Safely trigger mailto without mutating window.location directly
+    const mailtoLink = document.createElement("a");
+    mailtoLink.href = `mailto:${email}`;
+    mailtoLink.click();
+  };
+
   const socials: SocialItem[] = [
     {
       name: "Mail",
       href: "mailto:pbala1851@gmail.com",
+      emailAddress: "pbala1851@gmail.com",
       tooltipText: "send_email",
       brandClass: "hover:bg-[#EA4335]/10 hover:border-[#EA4335]/30 hover:text-[#EA4335]",
       icon: (
@@ -64,23 +86,53 @@ export default function SocialButtons() {
 
   return (
     <div className="flex items-center gap-3.5 pt-2 select-none">
-      {socials.map((social) => (
-        <div key={social.name} className="group/btn relative">
-          <a
-            href={social.href}
-            rel="noopener noreferrer"
-            aria-label={`Connect via ${social.name}`}
-            className={`p-3.5 rounded-xl text-zinc-500 bg-white border border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 block ${social.brandClass}`}
-          >
-            {social.icon}
-          </a>
+      {socials.map((social) => {
+        const isEmail = Boolean(social.emailAddress);
+        const isCopied = copiedName === social.name;
 
-          {/* LARGE NEAT OPACITY TOOLTIP */}
-          <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 pointer-events-none transition-opacity duration-100 whitespace-nowrap px-3 py-1.5 rounded bg-zinc-900 text-zinc-50 text-[11px] font-mono tracking-wide shadow-md group-hover/btn:opacity-100 z-50">
-            {social.tooltipText}
-          </span>
-        </div>
-      ))}
+        return (
+          <div key={social.name} className="group/btn relative">
+            {isEmail ? (
+              <button
+                type="button"
+                onClick={() => handleEmailClick(social.emailAddress!, social.name)}
+                aria-label={`Send email or copy ${social.emailAddress}`}
+                className={`p-3.5 rounded-xl text-zinc-500 bg-white border border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 block cursor-pointer active:scale-95 ${social.brandClass}`}
+              >
+                {social.icon}
+              </button>
+            ) : (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Connect via ${social.name}`}
+                className={`p-3.5 rounded-xl text-zinc-500 bg-white border border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all duration-200 block ${social.brandClass}`}
+              >
+                {social.icon}
+              </a>
+            )}
+
+            {/* NEAT MONO TOOLTIP WITH COPIED CONFIRMATION */}
+            <span
+              className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 pointer-events-none transition-all duration-150 whitespace-nowrap px-3 py-1.5 rounded bg-zinc-900 text-zinc-50 text-[11px] font-mono tracking-wide shadow-md group-hover/btn:opacity-100 z-50 flex items-center gap-1.5 ${
+                isCopied ? "!opacity-100 bg-emerald-950 text-emerald-300 border border-emerald-800/60" : ""
+              }`}
+            >
+              {isCopied ? (
+                <>
+                  <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span>opened + copied!</span>
+                </>
+              ) : (
+                social.tooltipText
+              )}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }

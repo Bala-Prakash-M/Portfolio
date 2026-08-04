@@ -15,78 +15,77 @@ export default function HeroBackground() {
   }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Throttled trigger calculations
     const triggerPoint = windowHeight * (isMobile || isPad ? 0.2 : 0.3);
     const shouldClear = latest > triggerPoint;
 
-    // FIX 1: Performance optimization—only trigger state update if value actually changes
     if (shouldClear !== fogCleared) {
       setFogCleared(shouldClear);
     }
   });
 
   return (
-    /* STABLE PARENT: Stays persistently mounted to act as a stable layout canvas, 
-       no longer toggles visibility on scroll.
-    */
     <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0 bg-[#EFEBE6]">
-      {/* OPTIMIZED GPU-ACCELERATED DESKTOP BLOB */}
+      {/* GPU-ACCELERATED JELLYFISH PULSING BLOB */}
       <motion.div
-        /* FIX 2: Added 'will-change-transform' to warn the GPU and 'top/left' positioning
-           to prevent browsers defaulting to absolute 0,0 and popping.
-        */
-        className="absolute top-0 left-0 w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] rounded-full blur-[90px] will-change-transform"
+        /* SMOOTH INITIAL APPEARANCE: Fades in gracefully from 0 to 0.6 on page load */
+        initial={{ opacity: 0, scale: 0.85 }}
+        className="absolute top-0 left-0 w-[40vw] h-[40vw] min-w-[380px] min-h-[380px] rounded-full blur-[35px] sm:blur-[50px] opacity-60 will-change-transform"
         animate={{
+          /* 1. ORIGINAL DRIFTING PATH */
           x: ["0vw", "60vw", "40vw", "0vw"],
           y: ["0vh", "30vh", "60vh", "0vh"],
-          /* FIX 3: Animate opacity directly inside the motion track. 
-             This forces the blob to fade out smoothly in place without interrupting or resetting its travel vector calculations.
-          */
-          opacity: fogCleared ? 0 : 1,
 
+          /* 2. PRONOUNCED PULSE */
+          scaleX: [1, 0.72, 0.95, 0.68, 0.88, 1],
+          scaleY: [1, 0.92, 0.70, 0.94, 0.75, 1],
+
+          /* 3. ASYMMETRIC JELLYFISH BELL MORPHING */
+          borderRadius: [
+            "50% 50% 50% 50% / 50% 50% 50% 50%",
+            "68% 32% 60% 40% / 40% 60% 35% 65%",
+            "38% 62% 35% 65% / 65% 35% 60% 40%",
+            "58% 42% 62% 38% / 45% 55% 42% 58%",
+            "50% 50% 50% 50% / 50% 50% 50% 50%",
+          ],
+
+          /* 4. SCROLL FADE OUT (Fades out when scrolled, stays 0.60 when active) */
+          opacity: fogCleared ? 0 : 0.60,
+
+          /* 5. LIGHTENED & SOFTER 4-COLOR PALETTE (No dark or heavy muddy spots) */
           background: [
-            // 1. Start: Vivid Coral
-            "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
-            
-            // 2. Neon Magenta / Pink
-            "radial-gradient(circle, #FF007F 0%, transparent 60%)",
-            
-            // 3. Electric Violet
-            "radial-gradient(circle, #7C3AED 0%, transparent 60%)",
-            
-            // 4. Deep Indigo (Sophisticated transition from Violet)
-            "radial-gradient(circle, #4F46E5 0%, transparent 60%)",
-            
-            // 5. Bordeaux / Rich Plum (Deep, editorial depth)
-            "radial-gradient(circle, #9D174D 0%, transparent 60%)",
-            
-            // 6. Warm Amber / Burnished Gold (Luxurious earth tone)
-            "radial-gradient(circle, #D97706 0%, transparent 60%)",
-            
-            // 7. Vivid Tangerine
-            "radial-gradient(circle, #FF6600 0%, transparent 60%)",
-            
-            // 8. Royal Crimson
-            "radial-gradient(circle, #C92A4A 0%, transparent 60%)",
-            
-            // 9. END: Perfectly match start for seamless loop
-            "radial-gradient(circle, #FF7A59 0%, transparent 60%)",
+            // 1. Soft Warm Coral (Lighter, airy)
+            "radial-gradient(circle, #D07058 0%, #D07058 30%, transparent 70%)",
+
+            // 2. Gentle Rose Pink (Soft blush tone)
+            "radial-gradient(circle, #C45B7D 0%, #C45B7D 30%, transparent 70%)",
+
+            // 3. Light Lavender Violet (No dark indigo shadow)
+            "radial-gradient(circle, #8B70C8 0%, #8B70C8 30%, transparent 70%)",
+
+            // 4. Periwinkle Blue (Airy and subtle)
+            "radial-gradient(circle, #6F78C5 0%, #6F78C5 30%, transparent 70%)",
+
+            // 5. Seamless Loop back to Soft Warm Coral
+            "radial-gradient(circle, #D07058 0%, #D07058 30%, transparent 70%)",
           ],
         }}
         style={{
-          // FIX 4: Forces absolute hardware layer promotion for the GPU
           transform: "translateZ(0)",
         }}
         transition={{
           x: { duration: 25, repeat: Infinity, ease: "easeInOut" },
           y: { duration: 20, repeat: Infinity, ease: "easeInOut" },
-          background: { duration: 35, repeat: Infinity, ease: "linear" },
-          // Synced duration for the opacity fade on scroll
-          opacity: { duration: 0.8, ease: "easeInOut" },
+          scaleX: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          scaleY: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          borderRadius: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          background: { duration: 24, repeat: Infinity, ease: "linear" },
+          /* Gentle initial fade-in transition */
+          opacity: { duration: 1.6, ease: "easeOut" },
+          scale: { duration: 1.6, ease: "easeOut" },
         }}
       />
 
-      {/* Subtle Grain Overlay */}
+      {/* SUBTLE GRAIN OVERLAY */}
       <div
         className="absolute inset-0 opacity-[0.04] mix-blend-soft-light pointer-events-none z-0"
         style={{

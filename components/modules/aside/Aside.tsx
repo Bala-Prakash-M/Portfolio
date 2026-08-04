@@ -1,9 +1,32 @@
 "use client";
 
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
 export default function Aside() {
+  const [copied, setCopied] = useState(false);
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const email = "pbala1851@gmail.com";
+
+    // 1. Copy to clipboard
+    if (typeof window !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(email);
+    }
+
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2500);
+
+    // 2. Safely trigger mailto client without mutating window.location directly
+    const mailtoLink = document.createElement("a");
+    mailtoLink.href = `mailto:${email}`;
+    mailtoLink.click();
+  };
+
   // Ultra-efficient GPU variants layout tree
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -11,22 +34,22 @@ export default function Aside() {
       opacity: 1,
       transition: {
         staggerChildren: 0.08, // Time between each button's arrival
-        delayChildren: 0.8,    // Late entry: waits for main hero text to finish layout load
+        delayChildren: 0.8, // Late entry: waits for main hero text to finish layout load
       },
     },
   };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 6 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } // Crisp premium Bezier curve
+      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }, // Crisp premium Bezier curve
     },
   };
 
   return (
-    <motion.aside 
+    <motion.aside
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -96,15 +119,38 @@ export default function Aside() {
         </a>
       </motion.div>
 
-      {/* Email Button */}
+      {/* Email Button (Safe Mailto + Copy to Clipboard) */}
       <motion.div variants={itemVariants} className="group relative flex items-center">
-        <span className="absolute right-8 opacity-0 pointer-events-none transition-opacity duration-200 whitespace-nowrap px-3 py-1.5 rounded-lg bg-[#FAF9F6] border border-white text-zinc-800 text-[10px] font-bold uppercase tracking-wider shadow-[0_4px_20px_-2px_rgba(24,24,27,0.04)] group-hover:opacity-100">
-          Get in touch
+        <span
+          className={`absolute right-8 opacity-0 pointer-events-none transition-all duration-200 whitespace-nowrap px-3 py-1.5 rounded-lg border text-[10px] font-bold uppercase tracking-wider shadow-[0_4px_20px_-2px_rgba(24,24,27,0.04)] group-hover:opacity-100 flex items-center gap-1.5 z-50 ${
+            copied
+              ? "!opacity-100 bg-emerald-950 text-emerald-300 border-emerald-800/60 font-mono"
+              : "bg-[#FAF9F6] border-white text-zinc-800"
+          }`}
+        >
+          {copied ? (
+            <>
+              <svg
+                className="w-3 h-3 text-emerald-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span>Opened + Copied!</span>
+            </>
+          ) : (
+            "Get in touch"
+          )}
         </span>
 
-        <a
-          href="mailto:pbala1851@gmail.com"
-          className="hover:text-[#EA4335] transition-colors block p-1 active:scale-95 duration-200"
+        <button
+          type="button"
+          onClick={handleEmailClick}
+          aria-label="Send email or copy address"
+          className="hover:text-[#EA4335] transition-colors block p-1 active:scale-95 duration-200 cursor-pointer"
         >
           <svg
             className="w-4 h-4"
@@ -119,7 +165,7 @@ export default function Aside() {
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
             />
           </svg>
-        </a>
+        </button>
       </motion.div>
     </motion.aside>
   );
